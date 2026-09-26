@@ -1,7 +1,7 @@
 // utils/apiClient.js
 import { request } from "@playwright/test";
 
-const BASE_URL = process.env.BASE_URL || "https://dummyjson.com";
+const BASE_URL = process.env.BASE_URL || "https://www.dummyjson.com";
 
 async function createApiClient(authToken = null) {
   const headers = {
