@@ -1,4 +1,4 @@
-import { createApiClient } from "../utils/apiClients";
+import { createApiClient } from "../utils/apiClients.js";
 
 export class ProductService {
   constructor() {
@@ -10,14 +10,25 @@ export class ProductService {
   }
 
   async getAll(params = {}) {
-    return this.context.get("/products", { params });
+    if (!this.context) {
+      throw new Error("ProductService is not initialized");
+    }
+
+    return await this.context.get("/products", { params });
   }
 
   async getById(id) {
-    return this.context.get(`/products/${id}`);
+    if (!this.context) {
+      throw new Error("ProductService is not initialized");
+    }
+
+    return await this.context.get(`/products/${id}`);
   }
 
   async dispose() {
-    await this.context.dispose();
+    if (this.context) {
+      await this.context.dispose();
+      this.context = null;
+    }
   }
 }
