@@ -23,5 +23,12 @@ test.describe("Products API Validation", () => {
   }) => {
     const response = await productService.getAll();
     expect(response.status()).toBe(200);
+    expect(response.ok()).toBeTruthy();
+
+    const data = response.json();
   });
+
+  test("GET /products endpoint response schema validation", () => {});
+  test("GET /products/:id returns specific product", () => {});
+  test("GET /products/:id returns 404 for non existing id", () => {});
 });
