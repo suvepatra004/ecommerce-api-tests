@@ -5,8 +5,10 @@
  */
 import { test, expect } from "@playwright/test";
 import { ProductService } from "../../services/productService";
+import { loadSchema, validateSchema } from "../../utils/validateSchema";
 
 let productService;
+const productSchema = loadSchema("product.schema.json");
 
 test.beforeAll(async () => {
   productService = new ProductService();
@@ -54,5 +56,13 @@ test.describe("Products API Validation", () => {
   test("GET /products/:id returns 404 for non existing id", async () => {
     const response = await productService.getById(989); // invalid product id
     expect(response.status()).toBe(404);
+  });
+
+  test("GET /products/:id response matches the product schema", async () => {
+    const response = await productService.getById(1);
+    const body = await response.json();
+
+    const { valid, errors } = validateSchema(body, productSchema);
+    expect(valid, JSON.stringify(errors)).toBe(true);
   });
 });

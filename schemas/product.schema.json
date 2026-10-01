@@ -1,0 +1,12 @@
+{
+  "type": "object",
+  "properties": {
+    "id": { "type": "number" },
+    "title": { "type": "string" },
+    "price": { "type": "number" },
+    "stock": { "type": "number" },
+    "category": { "type": "string" }
+  },
+  "required": ["id", "title", "price", "stock", "category"],
+  "additionalProperties": true
+}
