@@ -1,7 +1,8 @@
+// fixtures/test-fixtures.js
 import { test as base } from "@playwright/test";
-import { ProductService } from "../services/productService";
-import { AuthService } from "../services/authService";
-import { CartService } from "../services/cartService";
+import { ProductService } from "../services/productService.js";
+import { AuthService } from "../services/authService.js";
+import { CartService } from "../services/cartService.js";
 
 const TEST_USER = {
   username: "emilys",
@@ -15,6 +16,7 @@ export const test = base.extend({
     await use(service);
     await service.dispose();
   },
+
   authenticatedCart: async ({}, use) => {
     const authService = new AuthService();
     await authService.init();
@@ -30,7 +32,9 @@ export const test = base.extend({
 
     await use({ cartService, userId });
 
-    await authService.dispose();
     await cartService.dispose();
+    await authService.dispose();
   },
 });
+
+export { expect } from "@playwright/test";

@@ -1,4 +1,4 @@
-import { createApiClient } from "../utils/apiClient.js";
+import { createApiClient } from "../utils/apiClients";
 
 export class CartService {
   constructor(accessToken) {
